@@ -109,4 +109,33 @@ router.delete("/:id", (req, res, next) => {
         });
     }
 });
+router.get("/", (req, res, next) => {
+    const username = req.query.user; // Verkrijg de gebruikersnaam uit de queryparameter
+
+    if (username) {
+        // Filter berichten op basis van de gebruikersnaam
+        const userMessages = messages.filter(msg => msg.user === username);
+
+        if (userMessages.length > 0) {
+            res.status(200).json({
+                message: `Berichten van gebruiker ${username}`,
+                status: "success",
+                data: { messages: userMessages }
+            });
+        } else {
+            res.status(404).json({
+                status: "error",
+                message: `Geen berichten gevonden voor gebruiker ${username}`
+            });
+        }
+    } else {
+        // Als geen gebruikersnaam is opgegeven, geef alle berichten terug
+        res.status(200).json({
+            message: "GET berichten",
+            status: "success",
+            data: { messages }
+        });
+    }
+});
+
 module.exports = router;

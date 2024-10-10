@@ -44,7 +44,7 @@ app.post('/api/v1/messages', (req, res) => {
   };
   messages.push(newMessage);
 
-  res.json({
+  res.status(201).json({
     status: "success",
     message: "Message added successfully",
     data: { message: newMessage }
@@ -91,7 +91,19 @@ app.delete('/api/v1/messages/:id', (req, res) => {
   }
 });
 
+// GET /api/v1/messages?user=username - Berichten voor specifieke gebruiker
+app.get('/api/v1/messages', (req, res) => {
+  const user = req.query.user;
+  const userMessages = messages.filter(msg => msg.user === user);
+
+  res.json({
+    status: "success",
+    message: "Messages fetched successfully",
+    data: { messages: userMessages }
+  });
+});
+
 // Server starten
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`); // Server draait op poort 3000
+  console.log(`Server draait op poort ${port}`); // Server draait op poort 3000
 });

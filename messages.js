@@ -6,7 +6,7 @@ app.use(express.json()); // Voor het parseren van JSON
 
 let messages = []; // Fakedatabase: een array voor berichten
 
-// GET /api/v1/messages - Alle berichten teruggeven
+// GET /api/v1/messages - Alle berichten ophalen
 app.get('/api/v1/messages', (req, res) => {
   res.json({
     status: "success",

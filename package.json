@@ -1,0 +1,16 @@
+{
+  "name": "w1_express",
+  "version": "1.0.0",
+  "description": "\"npm run dev\"\r }\r body text raw json {\r     \"message\": \"first comment\"\r }",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "node --watch index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "keywords": []
+}

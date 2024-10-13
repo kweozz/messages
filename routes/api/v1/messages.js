@@ -2,8 +2,7 @@ let express = require("express");
 const router = express.Router();
 
 // Dummy data (je kan deze data eventueel uit een database halen)
-let messages = [
-    {
+let messages = [{
         id: 1,
         user: "john",
         message: "Hello World!"
@@ -27,7 +26,9 @@ router.get("/", (req, res, next) => {
             res.status(200).json({
                 message: `Berichten van gebruiker ${username}`,
                 status: "success",
-                data: { messages: userMessages }
+                data: {
+                    messages: userMessages
+                }
             });
         } else {
             res.status(404).json({
@@ -40,7 +41,9 @@ router.get("/", (req, res, next) => {
         res.status(200).json({
             message: "GET berichten",
             status: "success",
-            data: { messages }
+            data: {
+                messages
+            }
         });
     }
 });
@@ -65,7 +68,10 @@ router.get("/:id", (req, res, next) => {
 
 // POST route voor het toevoegen van een bericht
 router.post("/", (req, res, next) => {
-    const { user, text } = req.body.message;
+    const {
+        user,
+        text
+    } = req.body.message;
     const newMessage = {
         id: messages.length + 1,
         user: user,
@@ -86,7 +92,9 @@ router.post("/", (req, res, next) => {
 // PUT route voor het bijwerken van een specifiek bericht
 router.put("/:id", (req, res, next) => {
     const messageId = parseInt(req.params.id, 10);
-    const { text } = req.body.message; // Verkrijg de nieuwe tekst uit de request body
+    const {
+        text
+    } = req.body.message; // Verkrijg de nieuwe tekst uit de request body
 
     const message = messages.find(msg => msg.id === messageId);
     if (message) {

@@ -8,6 +8,7 @@ var cors = require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+const mongoDb = "mongodb+srv://ilianbosserez:ynMzXPfwUxEcqFv7@les3mongodb.wvn9i.mongodb.net/?retryWrites=true&w=majority&appName=les3mongodb"
 var app = express();
 
 // view engine setup

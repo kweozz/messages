@@ -11,6 +11,7 @@ var usersRouter = require('./routes/users');
 const mongoDb = "mongodb+srv://ilianbosserez:ynMzXPfwUxEcqFv7@les3mongodb.wvn9i.mongodb.net/?retryWrites=true&w=majority&appName=les3mongodb"
 var app = express();
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

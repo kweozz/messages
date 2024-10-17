@@ -2,7 +2,8 @@ let express = require("express");
 const router = express.Router();
 
 // Dummy data (je kan deze data eventueel uit een database halen)
-let messages = [{
+let messages = [
+    {
         id: 1,
         user: "john",
         message: "Hello World!"
@@ -11,41 +12,23 @@ let messages = [{
         id: 2,
         user: "Jane",
         message: "Hi"
+        
     }
 ];
 
-// GET route voor het ophalen van alle berichten of berichten van een specifieke gebruiker
 router.get("/", (req, res, next) => {
-    const username = req.query.user; // Verkrijg de gebruikersnaam uit de queryparameter
-
-    if (username) {
-        // Filter berichten op basis van de gebruikersnaam
-        const userMessages = messages.filter(msg => msg.user === username);
-
-        if (userMessages.length > 0) {
+        if (messages.length > 0) {
             res.status(200).json({
-                message: `Berichten van gebruiker ${username}`,
+                message: `Berichten gevonden`,
                 status: "success",
-                data: {
-                    messages: userMessages
-                }
+                data: { messages: messages }
             });
         } else {
             res.status(404).json({
                 status: "error",
-                message: `Geen berichten gevonden voor gebruiker ${username}`
+                message: `Geen berichten gevonden`
             });
         }
-    } else {
-        // Als geen gebruikersnaam is opgegeven, geef alle berichten terug
-        res.status(200).json({
-            message: "GET berichten",
-            status: "success",
-            data: {
-                messages
-            }
-        });
-    }
 });
 
 // GET route voor het ophalen van een specifiek bericht op basis van ID
@@ -68,10 +51,7 @@ router.get("/:id", (req, res, next) => {
 
 // POST route voor het toevoegen van een bericht
 router.post("/", (req, res, next) => {
-    const {
-        user,
-        text
-    } = req.body.message;
+    const { user, text } = req.body.message;
     const newMessage = {
         id: messages.length + 1,
         user: user,
@@ -92,9 +72,7 @@ router.post("/", (req, res, next) => {
 // PUT route voor het bijwerken van een specifiek bericht
 router.put("/:id", (req, res, next) => {
     const messageId = parseInt(req.params.id, 10);
-    const {
-        text
-    } = req.body.message; // Verkrijg de nieuwe tekst uit de request body
+    const { text } = req.body.message; // Verkrijg de nieuwe tekst uit de request body
 
     const message = messages.find(msg => msg.id === messageId);
     if (message) {
